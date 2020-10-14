@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TimerController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TimerSoundController;
+use App\Http\Controllers\SettingsModalController;
+use App\Http\Controllers\TimerIntervalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +25,25 @@ use App\Http\Controllers\UserController;
 // });
 
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::post('auth/me', [ AuthController::class, 'me' ]);
 
     Route::get('/users/{user}', [ UserController::class, 'show' ]);
     Route::put('/users/{user}', [ UserController::class, 'update' ]);
 
+    Route::get('/timers', [ TimerController::class,'index']);
+    Route::get('/timers/{timer}', [ TimerController::class,'show']);
+
+    Route::post('/timers', [ TimerController::class,'store']);
+    Route::put('/timers/{timer}', [ TimerController::class,'update']);
+    Route::delete('/timers/{timer}', [ TimerController::class,'destroy']);
+
+    Route::get('/timer-sounds', [ TimerSoundController::class,'index']);
+
+    Route::post('/timer-intervals', [ TimerIntervalController::class,'store']);
+
+    Route::get('/settings', [ SettingsController::class, 'index']);
+    Route::get('/settings/{settings:key}', [ SettingsController::class, 'show']);
+    Route::patch('/settings', [ SettingsController::class, 'update']);
+
+    Route::patch('/settings-modal', [ SettingsModalController::class,'update']);
 });

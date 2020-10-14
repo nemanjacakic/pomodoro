@@ -16,8 +16,8 @@
         <!-- Messages Dropdown Menu -->
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="far fa-bell"></i>
+          <a class="nav-link" data-toggle="dropdown" href="#" @click.prevent="showSettingsModal()">
+            <i class="fas fa-cog"></i>
           </a>
         </li>
         <li class="dropdown user user-menu open">
@@ -71,13 +71,20 @@
 <script>
 import { mapGetters } from "vuex";
 import LogoutButton from "~/views/auth/Logout";
+import SettingsModal from "~/views/SettingsModal";
 
 export default {
   components: {
-    LogoutButton
+    LogoutButton,
+    SettingsModal
   },
   computed: {
     ...mapGetters("auth", ["user"])
+  },
+  methods: {
+    showSettingsModal() {
+      this.$modal.show(SettingsModal, {}, { width: "80%", height: "auto", pivotY: 0.1, scrollable: true });
+    }
   }
 };
 </script>

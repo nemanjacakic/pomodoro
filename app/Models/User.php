@@ -41,4 +41,72 @@ class User extends Authenticatable
     {
         return 'https://www.gravatar.com/avatar/' . md5($email ?? $this->email) . '?s=100&d=mp';
     }
+
+    public function timers()
+    {
+        return $this->hasMany(Timer::class);
+    }
+
+    public function timerIntervals()
+    {
+        return $this->hasMany(TimerInterval::class);
+    }
+
+    public function settings()
+    {
+        return $this->hasMany(Settings::class);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        $settings = [
+            [
+                'key' => 'timerSoundEnabled',
+                'value' => true,
+                'type' => 'boolean',
+                'label' => 'timer'
+            ],
+            [
+                'key' => 'timerSound',
+                'value' => 1,
+                'type' => 'integer',
+                'label' => 'timer'
+            ],
+            [
+              'key' => 'showNotifications',
+              'value' => true,
+              'type' => 'boolean',
+              'label' => 'timer'
+          ]
+        ];
+
+        $timers = [
+            [
+                'order' => 0,
+                'name' => 'Pomodoro',
+                'duration' => 1500
+            ],
+            [
+                'order' => 1,
+                'name' => 'Short break',
+                'duration' => 300
+            ],
+            [
+                'order' => 2,
+                'name' => 'Long break',
+                'duration' => 900
+            ]
+        ];
+
+        static::created(function ($user) use ($settings, $timers) {
+                $user->settings()->createMany($settings);
+
+                $user->timers()->createMany($timers);
+        });
+    }
 }

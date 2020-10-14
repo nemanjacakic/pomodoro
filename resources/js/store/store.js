@@ -3,7 +3,10 @@ import Vuex from "vuex";
 
 import auth from "./modules/auth.js";
 import users from "./modules/users.js";
-
+import timers from "./modules/timers.js";
+import timerSounds from "./modules/timerSounds.js";
+import timerIntervals from "./modules/timerIntervals.js";
+import settings from "./modules/settings.js";
 
 import NProgress from "nprogress";
 
@@ -40,6 +43,10 @@ export default new Vuex.Store({
   },
   modules: {
     auth,
-    users
+    users,
+    timers,
+    timerSounds,
+    timerIntervals,
+    settings
   }
 });

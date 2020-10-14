@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
 
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+$primary: tomato;
+$danger:darkred;
 
-@import '~admin-lte/dist/css/adminlte.css';
+@import '~admin-lte/build/scss/AdminLTE.scss';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
@@ -10,6 +12,12 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~nprogress/nprogress.css';
 @import '~alertifyjs/build/css/alertify.css';
 @import '~alertifyjs/build/css/themes/bootstrap.css';
+
+@import 'partials/timer';
+
+.pomodoro {
+    margin: 3rem 0;
+}
 
 .form-control {
   color: #000000;
@@ -65,38 +73,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
   border-top: 1px solid #dee2e6;
 }
 
-body {
-  .fm-success {
-    border-color: rgba(91, 189, 114, 0.95);
-    background: rgba(91, 189, 114, 0.95);
-    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);
-    color: #fff;
-  }
+body .v--modal-overlay {
+    z-index: 2000;
 
-  .fm-error, .fm-danger {
-    color:#fff;
-    border-color: rgba(217, 92, 92, 0.95);
-    background: rgba(217, 92, 92, 0.95);
-    text-shadow: -1px -1px 0rgba(0, 0, 0, 0.5);
-  }
-
-
-  .fm-warning {
-    background:rgba(252, 248, 215, 0.95);
-    border-color:#999;
-    color: #000;
-  }
-
-  .fm-info {
-    color:#fff;
-    border-color: rgb(23,162,184, 0.95);
-    background: rgb(23,162,184, 0.95);
-    text-shadow: -1px -1px 0rgba(0, 0, 0, 0.5);
-  }
+    .v--modal-box {
+        padding: 0.5rem;
+    }
 }
 
-.v--modal-overlay .v--modal-box {
-  padding: 0.5rem;
+.alertify-notifier {
+    z-index: 2001;
 }
 
 .card-header-collapsible {
@@ -109,49 +95,5 @@ body {
 
   .btn {
     margin-left: 1rem;
-  }
-}
-
-.section {
-  &__data {
-    border: 1px solid #dee2e6;
-    padding: 1rem;
-
-    &__add {
-      margin: 0 auto 37px;
-      display: block;
-      padding: 0.375rem 2.75rem;
-    }
-
-    &__remove {
-      padding: 1rem 1rem;
-      margin: -1rem -1rem -1rem auto;
-      background-color: transparent;
-      border: 0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      line-height: 1;
-      color: #000;
-      text-shadow: 0 1px 0 #fff;
-      opacity: .5;
-
-      &:hover {
-        opacity: 0.75;
-      }
-    }
-  }
-
-  &__subsection {
-    &__remove {
-      padding: 1rem 1rem;
-      background-color: transparent;
-      border: 0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      line-height: 1;
-      color: #000;
-      text-shadow: 0 1px 0 #fff;
-      opacity: .5;
-    }
   }
 }

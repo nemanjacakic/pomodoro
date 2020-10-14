@@ -5,3 +5,7 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const SET_USER = "SET_USER";
 export const VERIFY_USER = "VERIFY_USER";
+
+export const SET_TIMERS = "SET_TIMERS";
+export const SET_SETTINGS = "SET_SETTINGS";
+export const SET_TIMER_SOUNDS = "SET_TIMER_SOUNDS";

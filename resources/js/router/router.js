@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 
 import Admin from "~/views/Admin";
 
-import Dashboard from "~/views/Dashboard";
+import Timer from "~/views/Timer";
 import Login from "~/views/auth/Login";
 
 import store from "~/store/store";
@@ -27,7 +27,7 @@ const routes = [
       {
         name: "dashboard",
         path: "dashboard",
-        component: Dashboard
+        component: Timer
       },
       ...users,
     ]

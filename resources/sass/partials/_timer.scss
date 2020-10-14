@@ -1,0 +1,22 @@
+.timer {
+    text-align: center;
+
+    &__time {
+        font-size: 10rem;
+    }
+
+    &__title {
+        margin: 0 auto 2rem;
+        width: 70%;
+    }
+
+    &__buttons {
+        display: block;
+        margin: 10px 0;
+    }
+
+    &__btn {
+        padding: 0.5rem 3rem;
+        font-size: 1.5rem;
+    }
+}
