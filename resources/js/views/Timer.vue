@@ -19,7 +19,7 @@
           <label for="timer-title">Title</label>
     <input type="text" class="form-control" name="timer-title" v-model="activeTimer.title">
     </div>
-    <div class="timer__buttons btn-group btn-group-toggle">
+    <div class="timer__buttons">
         <button type="button" class="timer__btn btn btn-lg btn-primary" :disabled="timerIsOn" @click="startTimer()">Start</button>
         <button type="button" class="timer__btn btn btn-lg btn-success" :disabled="timerIsOff && activeTimer.duration === activeTimer.timeLeft" @click="saveCurrentTimer()">Finish</button>
         <button type="button" class="timer__btn btn btn-lg btn-secondary" :disabled="timerIsOff" @click="stopTimer()">Stop</button>
@@ -32,7 +32,7 @@
 
   </div>
 
-<div class="pomodoros-list col-md-3">
+<div class="timer-interval-list col-md-3">
     <h3>Intervals finished:</h3>
     <ul class="list-unstyled">
         <li v-for="(interval, index) in timerIntervals" :key="index"><i @click="removeTimerInterval(index)" class="fas fa-times-circle mr-2"></i>{{ interval.type }} : {{ interval.duration }} <span v-if="interval.title !== ''">{{ interval.title }}</span></li>

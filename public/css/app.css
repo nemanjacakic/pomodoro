@@ -39812,8 +39812,28 @@ readers do not read off random characters that represent icons */
 }
 
 .timer__buttons {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin: 10px 0;
+}
+
+@media (min-width: 768px) {
+  .timer__buttons {
+    width: 70%;
+    margin: 10px auto;
+  }
+}
+
+.timer__buttons > button {
+  margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+  .timer__buttons > button {
+    flex: 1;
+    margin: 5px;
+  }
 }
 
 .timer__btn {
@@ -39822,7 +39842,23 @@ readers do not read off random characters that represent icons */
 }
 
 .pomodoro {
-  margin: 3rem 0;
+  margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .pomodoro {
+    margin: 3rem 0;
+  }
+}
+
+.timer-interval-list {
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .timer-interval-list {
+    margin: 0;
+  }
 }
 
 .form-control {

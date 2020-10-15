@@ -11,8 +11,24 @@
     }
 
     &__buttons {
-        display: block;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
         margin: 10px 0;
+
+        @media (min-width: 768px) {
+            width: 70%;
+            margin: 10px auto;
+        }
+
+        > button {
+            margin-bottom: 5px;
+
+            @media (min-width: 768px) {
+                flex: 1;
+                margin: 5px;
+            }
+        }
     }
 
     &__btn {
