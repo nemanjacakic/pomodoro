@@ -9,6 +9,7 @@ import Login from "~/views/auth/Login";
 import store from "~/store/store";
 
 import users from "./users";
+import timerIntervals from "./timerIntervals";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,7 @@ const routes = [
         component: Timer
       },
       ...users,
+      ...timerIntervals
     ]
   }
 ];

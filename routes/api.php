@@ -20,10 +20,6 @@ use App\Http\Controllers\TimerIntervalController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('auth/me', [ AuthController::class, 'me' ]);
 
@@ -39,7 +35,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/timer-sounds', [ TimerSoundController::class,'index']);
 
+    Route::get('/timer-intervals', [ TimerIntervalController::class,'index']);
     Route::post('/timer-intervals', [ TimerIntervalController::class,'store']);
+    Route::delete('/timer-intervals/{timerInterval}', [ TimerIntervalController::class,'destroy']);
 
     Route::get('/settings', [ SettingsController::class, 'index']);
     Route::get('/settings/{settings:key}', [ SettingsController::class, 'show']);

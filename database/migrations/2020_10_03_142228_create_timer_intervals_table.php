@@ -18,7 +18,7 @@ class CreateTimerIntervalsTable extends Migration
             $table->foreignId('timer_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('user_id')->constrained();
             $table->string('title')->default('');
-            $table->string('duration');
+            $table->integer('duration');
             $table->timestamps();
         });
     }

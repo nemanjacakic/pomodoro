@@ -49,6 +49,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'timerIntervals.list' }" class="nav-link">
+              <i class="far fa-calendar-alt"></i>
+              <p>
+                Timer Intervals
+              </p>
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

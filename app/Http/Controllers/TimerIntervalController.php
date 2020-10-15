@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use App\Models\TimerInterval;
 use Illuminate\Http\Response;
+use App\Http\Resources\TimerIntervalResource;
 
 class TimerIntervalController extends ApiController
 {
@@ -15,17 +17,11 @@ class TimerIntervalController extends ApiController
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->respondWithData(
+                TimerIntervalResource::collection(
+                    auth()->user()->timerIntervals()->latest()->get()
+                    )
+            );
     }
 
     /**
@@ -36,7 +32,14 @@ class TimerIntervalController extends ApiController
      */
     public function store(Request $request)
     {
-        auth()->user()->timerIntervals()->createMany($request->intervals);
+        $intervals = array_map( function($item) {
+            $item["duration"] = CarbonInterval::createFromFormat('i:s', $item["duration"])->totalSeconds;
+
+            return $item;
+
+        }, $request->intervals );
+
+        auth()->user()->timerIntervals()->createMany($intervals);
 
         return $this->respondWithData('success', Response::HTTP_CREATED);
     }
@@ -48,17 +51,6 @@ class TimerIntervalController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function show(TimerInterval $timerInterval)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TimerInterval  $timerInterval
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TimerInterval $timerInterval)
     {
         //
     }
@@ -83,6 +75,8 @@ class TimerIntervalController extends ApiController
      */
     public function destroy(TimerInterval $timerInterval)
     {
-        //
+        $timerInterval->delete();
+
+        return $this->respondWithData(new TimerIntervalResource($timerInterval));
     }
 }
