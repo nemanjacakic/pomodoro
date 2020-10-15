@@ -74,34 +74,12 @@ export default {
         timeLeft: ""
       },
       notification: {
-      title: 'Simple Title',
-      permissionState: '',
-      options: {
-          body: 'Timer finished!',
-        }
+        title: 'Timer finished!',
       }
     }
   },
   mounted() {
     this.loadUnsavedTimerIntervals();
-
-      //     localStorage.setItem(TIMER_INTERVALS, JSON.stringify([
-      //   {
-      //     type: 'Pomodoro',
-      //     title: '',
-      //     duration: '25:00'
-      //   },
-      //   {
-      //     type: 'Short Break',
-      //     title: '',
-      //     duration: '05:00'
-      //   },
-      //   {
-      //     type: 'Pomodoro',
-      //     title: '',
-      //     duration: '25:00'
-      //   }
-      // ]));
 
     this.FULL_PAGE_LOADING(true);
 
@@ -189,8 +167,8 @@ export default {
               WebPush.showNotification(this.notification.title, this.notification.options);
             }
 
-            if (this.timerSoundEnabled) {
-              playSound('/audio/magic-mallet.wav');
+            if (this.settings['timerSoundEnabled']) {
+              playSound(this.settings['timerSound']);
             }
           }
         }, 1000);

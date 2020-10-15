@@ -73,8 +73,8 @@ class User extends Authenticatable
             ],
             [
                 'key' => 'timerSound',
-                'value' => 1,
-                'type' => 'integer',
+                'value' => '/audio/magic-mallet.wav',
+                'type' => 'string',
                 'label' => 'timer'
             ],
             [

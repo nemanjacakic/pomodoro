@@ -42,7 +42,7 @@
           <div class="form-group">
             <label>Select sound</label>
             <select class="form-control" v-model="settings['timerSound']">
-              <option v-for="sound in timerSounds" :key="sound.id" :value="sound.id">{{ sound.name }}</option>
+              <option v-for="sound in timerSounds" :key="sound.id" :value="sound.path">{{ sound.name }}</option>
             </select>
             <button type="button" class="btn btn-info mt-2" @click="playSelectedSound">Play sound</button>
           </div>
@@ -107,13 +107,7 @@ export default {
     ...mapActions("settings", { getAllSettings: "getAll", updateSettings: "update" }),
     ...mapActions("timerSounds", { getAllTimerSounds: "getAll" }),
     playSelectedSound() {
-      let selectedSoundPath = this.timerSounds.filter((el, index) => {
-        return el.id === this.settings['timerSound'];
-      })[0].path;
-
-      //console.log(selectedSoundPath);
-
-      playSound(selectedSoundPath);
+      playSound(this.settings['timerSound']);
     },
     updateSettingsModal() {
       this.LOADING(true);
