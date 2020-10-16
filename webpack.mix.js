@@ -17,7 +17,7 @@ mix
   .sass('resources/sass/app.scss', 'public/css');
 
   mix
-  .copy("resources/js/service-worker.js", "public")
+  .js("resources/js/service-worker.js", "public")
 
   mix
   .copy("resources/audio/", "public/audio")
