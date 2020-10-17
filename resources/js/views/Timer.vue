@@ -57,7 +57,6 @@ import {
   LOADING
 } from "~/store/mutation-types";
 
-import { playSound } from "~/helpers";
 import WebPush from "~/services/webpush";
 
 const TIMER_INTERVALS = 'timer-intervals';
@@ -73,12 +72,19 @@ export default {
         title: "",
         timeLeft: ""
       },
+      timerSound: null,
+      unwatchTimerSoundChange: null,
       notification: {
         title: 'Timer finished!',
       }
     }
   },
   mounted() {
+    this.unwatchTimerSoundChange = this.$store.watch((state, getters) => state.settings.settings.timerSound, (newValue, oldValue) => {
+        this.timerSound = new Audio(this.settings['timerSound']);
+      },
+    );
+
     this.loadUnsavedTimerIntervals();
 
     this.FULL_PAGE_LOADING(true);
@@ -99,6 +105,9 @@ export default {
           });
         }
     }).catch(() => this.FULL_PAGE_LOADING(false));
+  },
+  beforeDestroy() {
+    this.unwatchTimerSoundChange();
   },
   computed: {
     ...mapState("timers", ["timers"]),
@@ -168,7 +177,7 @@ export default {
             }
 
             if (this.settings['timerSoundEnabled']) {
-              playSound(this.settings['timerSound']);
+              this.timerSound.play();
             }
           }
         }, 1000);
@@ -242,7 +251,7 @@ export default {
         .then(() => {
           this.removeLocalTimerIntervals();
 
-          this.$alertify.success("Timer intervals created");
+          this.$alertify.success("Timer intervals saved");
         })
         .catch(data => {
           this.errors = data.errors;
