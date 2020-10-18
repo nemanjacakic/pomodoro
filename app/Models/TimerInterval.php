@@ -16,6 +16,11 @@ class TimerInterval extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'duration'
+       'timer_id', 'title', 'duration'
     ];
+
+    public function timer()
+    {
+        return $this->belongsTo(Timer::class);
+    }
 }

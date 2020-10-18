@@ -17,6 +17,7 @@ class TimerIntervalResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'timer' => $this->timer,
             'title' => $this->title,
             'duration' => gmdate("i:s", $this->duration),
             'updated_at' => Carbon::parse($this->updated_at)->format('d F Y'),

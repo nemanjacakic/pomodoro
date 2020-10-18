@@ -21,6 +21,7 @@
             <thead>
               <tr>
                 <th style="width: 1%">ID</th>
+                <th>Timer</th>
                 <th>Title</th>
                 <th>Duration</th>
                 <th>Date</th>
@@ -30,6 +31,7 @@
             <tbody>
               <tr v-for="interval in timerIntervals" :key="interval.id">
                 <td>{{ interval.id }}</td>
+                <td>{{ interval.timer ? interval.timer.name : '' }}</td>
                 <td>{{ interval.title }}</td>
                 <td>{{ interval.duration }}</td>
                 <td>{{ interval.updated_at }}</td>
@@ -47,6 +49,7 @@
             <tfoot>
               <tr>
                 <th>ID</th>
+                <th>Timer</th>
                 <th>Title</th>
                 <th>Duration</th>
                 <th>Date</th>

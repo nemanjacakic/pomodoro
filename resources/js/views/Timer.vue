@@ -158,6 +158,7 @@ export default {
       });
     },
     setActiveTimer(timer) {
+      this.activeTimer.timerID = timer.id;
       this.activeTimer.type = timer.name;
       this.activeTimer.duration = timer.duration;
       this.activeTimer.timeLeft = timer.duration;
@@ -239,6 +240,7 @@ export default {
     },
     saveTimerIntervalsLocaly() {
       this.timerIntervals.push({
+        timer_id: this.activeTimer.timerID,
         type: this.activeTimer.type,
         title: this.activeTimer.title,
         duration: this.subtractTime(this.activeTimer.duration, this.activeTimer.timeLeft)

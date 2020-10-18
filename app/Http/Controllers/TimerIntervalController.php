@@ -19,7 +19,7 @@ class TimerIntervalController extends ApiController
     {
         return $this->respondWithData(
                 TimerIntervalResource::collection(
-                    auth()->user()->timerIntervals()->latest()->get()
+                    auth()->user()->timerIntervals()->with('timer')->latest()->get()
                     )
             );
     }
