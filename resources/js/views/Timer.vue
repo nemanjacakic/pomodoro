@@ -21,7 +21,7 @@
     </div>
     <div class="timer__buttons">
         <button type="button" class="timer__btn btn btn-lg btn-primary" :disabled="timerIsOn" @click="startTimer()">Start</button>
-        <button type="button" class="timer__btn btn btn-lg btn-success" :disabled="timerIsOff && activeTimer.duration === activeTimer.timeLeft" @click="saveCurrentTimer()">Save</button>
+        <button type="button" class="timer__btn btn btn-lg btn-success" :disabled="timerIsOn || activeTimer.duration === activeTimer.timeLeft" @click="saveCurrentTimer()">Save</button>
         <button type="button" class="timer__btn btn btn-lg btn-secondary" :disabled="timerIsOff" @click="stopTimer()">Pause</button>
         <button type="button" class="timer__btn btn btn-lg btn-danger" :disabled="timerIsOff && activeTimer.duration === activeTimer.timeLeft" @click="resetTimer()">Reset</button>
     </div>
