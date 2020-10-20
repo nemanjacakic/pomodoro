@@ -13,6 +13,7 @@ $danger:darkred;
 @import '~alertifyjs/build/css/alertify.css';
 @import '~alertifyjs/build/css/themes/bootstrap.css';
 
+@import 'partials/form';
 @import 'partials/timer';
 
 .pomodoro {
@@ -31,14 +32,6 @@ $danger:darkred;
         margin: 0;
     }
 
-}
-
-.form-control {
-  color: #000000;
-}
-
-.form-check-input {
-    margin-right: 7px;
 }
 
 .user-menu {
@@ -92,6 +85,17 @@ body .v--modal-overlay {
 
     .v--modal-box {
         padding: 0.5rem;
+        overflow: visible;
+    }
+
+    .crud-form {
+        min-height: 80vh;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
     }
 }
 

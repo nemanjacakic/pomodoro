@@ -1,6 +1,16 @@
 import axios from "axios";
 
 export default {
+  get(id) {
+    return axios
+      .get("timer-intervals/" + id)
+      .then(({ data }) => {
+        return data.data;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  },
   getAll() {
     return axios
       .get("timer-intervals")
@@ -11,11 +21,27 @@ export default {
         return Promise.reject(error);
       });
   },
-  store(intervals) {
+  store(data) {
+    let postData = {};
+
+    if ( Array.isArray(data) ) {
+      postData.intervals = data;
+    } else {
+      postData = { ...data };
+    }
+
     return axios
-      .post("timer-intervals", {
-        intervals
+      .post("timer-intervals", postData)
+      .then(({ data }) => {
+        return data.data;
       })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  },
+  update({ id, ...data }) {
+    return axios
+      .put("timer-intervals/" + id, data)
       .then(({ data }) => {
         return data.data;
       })

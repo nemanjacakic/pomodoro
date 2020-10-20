@@ -22,22 +22,7 @@ class SettingsService
             "showNotifications" => ['required', 'boolean']
       ]);
     }
-    // public function update(Request $request)
-    // {
-    //     $settings = collect($request->all())->filter( function($value, $key) {
-    //         return $this->settings->has($key);
-    //      });
 
-    //     $request->validate($this->getValidationRules($settings));
-
-    //     $settings->each( function( $value, $key ) {
-    //         auth()->user()->settings()->where('key', $key)->update([
-    //             'value' => $value
-    //         ]);
-    //     });
-
-    //     return $this->respondWithData(['success' => true ]);
-    // }
     /**
      * Update the specified resource in storage.
      *

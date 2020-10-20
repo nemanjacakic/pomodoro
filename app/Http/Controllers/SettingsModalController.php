@@ -55,9 +55,17 @@ class SettingsModalController extends ApiController
         }
 
         if ( $timerValidator->fails() || $settingsValidator->fails() ) {
-            $errors = array_merge($errors, $timerValidator->errors()->all(), $settingsValidator->errors()->all());
+            $timersErrors = [
+                'timers' => $timerValidator->errors()->all()
+            ];
 
-            return $this->respondWithErrorWrongArguments( ['errors' => $errors]);
+            $settingsErrors = [
+                'settings' => $settingsValidator->errors()->all()
+            ];
+
+            $errors = array_merge($errors, $timersErrors, $settingsErrors);
+
+            return $this->respondWithErrorWrongArguments($errors);
         }
 
         if ($request->has('timers')) {

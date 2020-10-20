@@ -26,18 +26,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{user}', [ UserController::class, 'show' ]);
     Route::put('/users/{user}', [ UserController::class, 'update' ]);
 
-    Route::get('/timers', [ TimerController::class,'index']);
-    Route::get('/timers/{timer}', [ TimerController::class,'show']);
+    Route::get('/timers', [ TimerController::class, 'index']);
+    Route::get('/timers/{timer}', [ TimerController::class, 'show']);
 
-    Route::post('/timers', [ TimerController::class,'store']);
-    Route::put('/timers/{timer}', [ TimerController::class,'update']);
-    Route::delete('/timers/{timer}', [ TimerController::class,'destroy']);
+    Route::post('/timers', [ TimerController::class, 'store']);
+    Route::put('/timers/{timer}', [ TimerController::class, 'update']);
+    Route::delete('/timers/{timer}', [ TimerController::class, 'destroy']);
 
-    Route::get('/timer-sounds', [ TimerSoundController::class,'index']);
+    Route::get('/timer-sounds', [ TimerSoundController::class, 'index']);
 
-    Route::get('/timer-intervals', [ TimerIntervalController::class,'index']);
-    Route::post('/timer-intervals', [ TimerIntervalController::class,'store']);
-    Route::delete('/timer-intervals/{timerInterval}', [ TimerIntervalController::class,'destroy']);
+    Route::get('/timer-intervals', [ TimerIntervalController::class, 'index']);
+    Route::get('/timer-intervals/{timerInterval}', [ TimerIntervalController::class, 'show']);
+    Route::post('/timer-intervals', [ TimerIntervalController::class, 'store']);
+    Route::put('/timer-intervals/{timerInterval}', [ TimerIntervalController::class, 'update']);
+    Route::delete('/timer-intervals/{timerInterval}', [ TimerIntervalController::class, 'destroy']);
 
     Route::get('/settings', [ SettingsController::class, 'index']);
     Route::get('/settings/{settings:key}', [ SettingsController::class, 'show']);

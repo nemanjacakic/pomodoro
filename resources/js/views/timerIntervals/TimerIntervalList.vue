@@ -5,6 +5,14 @@
         <div class="row mb-2">
           <div class="col d-flex">
             <h1 class="mr-3">Timer intervals</h1>
+
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              @click="createTimerInterval"
+            >
+              Add new
+            </button>
           </div>
         </div>
       </div>
@@ -36,6 +44,13 @@
                 <td>{{ interval.duration }}</td>
                 <td>{{ interval.updated_at }}</td>
                 <td>
+                  <button
+                    type="button"
+                    class="btn btn-info mr-3"
+                    @click="editTimerInterval(interval.id)"
+                  >
+                    Edit
+                  </button>
                   <a
                     @click.prevent="deleteInterval(interval.id)"
                     class="btn  btn-danger"
@@ -70,7 +85,14 @@ import { mapState, mapMutations, mapActions } from "vuex";
 
 import { FULL_PAGE_LOADING, LOADING } from "~/store/mutation-types";
 
+import TimerIntervalCreate from "~/views/timerIntervals/TimerIntervalCreate";
+import TimerIntervalEdit from "~/views/timerIntervals/TimerIntervalEdit";
+
 export default {
+  components: {
+    TimerIntervalCreate,
+    TimerIntervalEdit
+  },
   mounted() {
     this.FULL_PAGE_LOADING(true);
     this.getAll()
@@ -81,6 +103,8 @@ export default {
         this.FULL_PAGE_LOADING(false);
       })
       .catch(() => this.FULL_PAGE_LOADING(false));
+
+
   },
   computed: {
     ...mapState("timerIntervals", ["timerIntervals"])
@@ -88,6 +112,12 @@ export default {
   methods: {
     ...mapMutations([LOADING, FULL_PAGE_LOADING]),
     ...mapActions("timerIntervals", ["getAll", "destroy"]),
+    createTimerInterval() {
+      this.$modal.show(TimerIntervalCreate, {}, { width: "80%", height: "auto", pivotY: 0.1, scrollable: true });
+    },
+    editTimerInterval(id) {
+      this.$modal.show(TimerIntervalEdit, { id }, { width: "80%", height: "auto", pivotY: 0.1, scrollable: true });
+    },
     deleteInterval(id) {
       this.$alertify.confirmWithTitle(
         "Are you sure ?",
