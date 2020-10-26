@@ -62,9 +62,4 @@ class SettingsController extends ApiController
 
         return $this->respondWithData(['success' => true ]);
     }
-
-    // private function getValidationRules(Collection $settings)
-    // {
-    //     return $this->settings->intersectByKeys($settings)->toArray();
-    // }
 }
