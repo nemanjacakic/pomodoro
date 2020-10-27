@@ -4,7 +4,7 @@ import {
   SET_TIMER_INTERVALS,
   ADD_TIMER_INTERVAL,
   UPDATE_TIMER_INTERVAL,
-  REMOVE_TIMER_INTERVALS
+  REMOVE_TIMER_INTERVAL
 } from "~/store/mutation-types";
 
 const store = {
@@ -24,8 +24,8 @@ const store = {
         timerInterval.id === updatedTimerInterval.id ? updatedTimerInterval : timerInterval
       );
     },
-    [REMOVE_TIMER_INTERVALS](state, id) {
-      state.timerIntervals = state.timerIntervals.filter(page => id !== page.id);
+    [REMOVE_TIMER_INTERVAL](state, id) {
+      state.timerIntervals = state.timerIntervals.filter(timerInterval => id !== timerInterval.id);
     }
   },
   actions: {
@@ -81,7 +81,7 @@ const store = {
       return timerIntervals
         .destroy(id)
         .then(data => {
-          commit(REMOVE_TIMER_INTERVALS, id);
+          commit(REMOVE_TIMER_INTERVAL, id);
 
           return data;
         })

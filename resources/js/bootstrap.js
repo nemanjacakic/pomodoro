@@ -4,6 +4,8 @@ import VueAlertify from "./plugins/VueAlertify";
 
 import VModal from "vue-js-modal";
 
+import VueGoodTablePlugin from 'vue-good-table';
+
 import "~/init/axios";
 
 window.$ = window.jQuery = require("jquery");
@@ -11,7 +13,10 @@ window.$ = window.jQuery = require("jquery");
 require("bootstrap");
 require("admin-lte");
 
-import "datatables.net-bs4";
+// import the styles
+import 'vue-good-table/dist/vue-good-table.css'
+
+Vue.use(VueGoodTablePlugin);
 
 Vue.use(VueAlertify, {
   notifier: {

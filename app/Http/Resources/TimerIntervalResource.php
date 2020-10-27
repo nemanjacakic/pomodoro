@@ -20,7 +20,7 @@ class TimerIntervalResource extends JsonResource
             'timer' => $this->timer,
             'title' => $this->title,
             'duration' => gmdate("i:s", $this->duration),
-            'updated_at' => Carbon::parse($this->updated_at)->format('d F Y'),
+            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }

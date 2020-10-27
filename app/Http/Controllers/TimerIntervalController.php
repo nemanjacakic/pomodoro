@@ -91,6 +91,8 @@ class TimerIntervalController extends ApiController
      */
     public function show(TimerInterval $timerInterval)
     {
+        $this->authorize('access', $timerInterval);
+
         return $this->respondWithData(new TimerIntervalResource($timerInterval));
     }
 
@@ -103,6 +105,8 @@ class TimerIntervalController extends ApiController
      */
     public function update(Request $request, TimerInterval $timerInterval)
     {
+        $this->authorize('access', $timerInterval);
+
         $this->validate($request, [
             'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}$/'],
             ],[
@@ -127,6 +131,8 @@ class TimerIntervalController extends ApiController
      */
     public function destroy(TimerInterval $timerInterval)
     {
+        $this->authorize('access', $timerInterval);
+
         $timerInterval->delete();
 
         return $this->respondWithData(new TimerIntervalResource($timerInterval));

@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col d-flex">
-            <h1 class="mr-3">Timer intervals</h1>
+            <h1 class="mr-3">Intervals</h1>
 
             <button
               type="button"
@@ -22,56 +22,24 @@
     <section class="content">
       <div class="card">
         <div class="card-body">
-          <table
-            id="gridList"
-            class="table table-bordered table-striped dataTable"
-          >
-            <thead>
-              <tr>
-                <th style="width: 1%">ID</th>
-                <th>Timer</th>
-                <th>Title</th>
-                <th>Duration</th>
-                <th>Date</th>
-                <th style="width: 20%">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="interval in timerIntervals" :key="interval.id">
-                <td>{{ interval.id }}</td>
-                <td>{{ interval.timer ? interval.timer.name : '' }}</td>
-                <td>{{ interval.title }}</td>
-                <td>{{ interval.duration }}</td>
-                <td>{{ interval.updated_at }}</td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-info mr-3"
-                    @click="editTimerInterval(interval.id)"
-                  >
-                    Edit
-                  </button>
-                  <a
-                    @click.prevent="deleteInterval(interval.id)"
-                    class="btn  btn-danger"
-                    href="#"
-                  >
-                    Delete
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>ID</th>
-                <th>Timer</th>
-                <th>Title</th>
-                <th>Duration</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </tfoot>
-          </table>
+            <vue-good-table
+            :columns="gridColumns"
+            :rows="timerIntervals"
+            :pagination-options="{enabled: true}"
+            >
+              <template slot="table-row" slot-scope="props">
+                <span v-if="props.column.field == 'tools'">
+                    <button type="button" class="btn btn-info mr-3"
+                      @click="editTimerInterval(props.row['id'])">
+                      Edit
+                    </button>
+                    <a @click.prevent="deleteTimerInterval(props.row['id'])"
+                      class="btn  btn-danger" href="#">
+                      Delete
+                    </a>
+                </span>
+              </template>
+          </vue-good-table>
         </div>
         <!-- /.card-body -->
       </div>
@@ -89,6 +57,36 @@ import TimerIntervalCreate from "~/views/timerIntervals/TimerIntervalCreate";
 import TimerIntervalEdit from "~/views/timerIntervals/TimerIntervalEdit";
 
 export default {
+  data() {
+    return {
+      gridColumns: [{
+          label: 'ID',
+          field: 'id',
+          type: 'number'
+        }, {
+          label: 'Timer',
+          field: 'timer.name',
+        }, {
+          label: 'Title',
+          field: 'title',
+        }, {
+          label: 'Duration',
+          field: 'duration',
+        }, {
+          label: 'Date',
+          field: 'created_at',
+          type: 'date',
+          dateInputFormat: 'yyyy-MM-dd',
+          dateOutputFormat: 'dd MMMM yyyy',
+        },
+        {
+          label: 'Tools',
+          sortable: false,
+          field: 'tools'
+        }
+      ]
+    }
+  },
   components: {
     TimerIntervalCreate,
     TimerIntervalEdit
@@ -97,14 +95,9 @@ export default {
     this.FULL_PAGE_LOADING(true);
     this.getAll()
       .then(() => {
-        $("#gridList").DataTable({
-          order: [0, "desc"]
-        });
         this.FULL_PAGE_LOADING(false);
       })
       .catch(() => this.FULL_PAGE_LOADING(false));
-
-
   },
   computed: {
     ...mapState("timerIntervals", ["timerIntervals"])
@@ -118,7 +111,7 @@ export default {
     editTimerInterval(id) {
       this.$modal.show(TimerIntervalEdit, { id }, { width: "80%", height: "auto", pivotY: 0.1, scrollable: true });
     },
-    deleteInterval(id) {
+    deleteTimerInterval(id) {
       this.$alertify.confirmWithTitle(
         "Are you sure ?",
         "This will delete selected timer interval",
