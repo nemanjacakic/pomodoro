@@ -19,4 +19,9 @@ class Timer extends Model
         'user_id', 'order', 'name', 'duration'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

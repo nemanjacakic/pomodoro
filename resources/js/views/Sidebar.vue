@@ -51,9 +51,17 @@
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'timerIntervals.list' }" class="nav-link">
-              <i class="far fa-calendar-alt"></i>
+              <i class="nav-icon far fa-calendar-alt"></i>
               <p>
-                Timer Intervals
+                Intervals
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'timers.list' }" class="nav-link">
+              <i class="nav-icon far fa-hourglass"></i>
+              <p>
+                Timers
               </p>
             </router-link>
           </li>
