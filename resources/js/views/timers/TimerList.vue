@@ -38,6 +38,9 @@
                       Delete
                     </a>
                 </span>
+                <span v-else-if="props.column.field == 'duration'">
+                    {{ formatTime(props.formattedRow[props.column.field]) }}
+                </span>
               </template>
           </vue-good-table>
         </div>
@@ -55,6 +58,8 @@ import { FULL_PAGE_LOADING, LOADING } from "~/store/mutation-types";
 
 import TimerCreate from "~/views/timers/TimerCreate";
 import TimerEdit from "~/views/timers/TimerEdit";
+
+import time from "~/mixins/time";
 
 export default {
     data() {
@@ -81,6 +86,9 @@ export default {
     TimerCreate,
     TimerEdit
   },
+  mixins: [
+      time
+  ],
   mounted() {
     this.FULL_PAGE_LOADING(true);
     this.getAll()
