@@ -114,14 +114,14 @@ export default {
     deleteTimerInterval(id) {
       this.$alertify.confirmWithTitle(
         "Are you sure ?",
-        "This will delete selected timer interval",
+        "This will delete selected interval",
         () => {
           this.LOADING(true);
           this.destroy(id)
             .then(() => {
               this.LOADING(false);
 
-              this.$alertify.success("Timer interval deleted");
+              this.$alertify.success("Interval deleted");
             })
             .catch(error => {
               this.LOADING(false);

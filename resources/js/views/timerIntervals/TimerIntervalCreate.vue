@@ -28,7 +28,7 @@
         <div class="form-group">
           <label>Duration:</label>
 
-          <div><VueTimepicker format="mm:ss" input-class="form-control--timepicker" v-model="interval.duration"></VueTimepicker></div>
+          <div><VueTimepicker format="HH:mm:ss" input-class="form-control--timepicker" v-model="interval.duration"></VueTimepicker></div>
         </div>
       </div>
       <!-- /.card-body -->

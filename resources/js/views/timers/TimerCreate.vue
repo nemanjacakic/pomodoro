@@ -21,9 +21,9 @@
         <div class="form-group">
           <label>Duration:</label>
 
-          <div><VueTimepicker format="mm:ss" input-class="form-control--timepicker" v-model="timer.duration"></VueTimepicker></div>
+          <div><VueTimepicker format="HH:mm:ss" input-class="form-control--timepicker" v-model="timer.duration"></VueTimepicker></div>
         </div>
-                <div class="form-group">
+        <div class="form-group">
           <label>Order:</label>
           <input
             v-model="timer.order"

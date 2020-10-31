@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use App\Models\TimerInterval;
 use Illuminate\Http\Response;
@@ -35,10 +34,10 @@ class TimerIntervalController extends ApiController
     {
         if ( $request->intervals !== null ) {
             $intervalArrayValidator = Validator::make($request->all(), [
-                    'intervals.*.duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}$/'],
+                    'intervals.*.duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/'],
                 ],[
                     'intervals.*.duration.required' => 'All intervals need to have a duration',
-                    'intervals.*.duration.regex' => 'All intervals durations need to be in the format mm:ss'
+                    'intervals.*.duration.regex' => 'All intervals durations need to be in the format HH:mm:ss'
                 ]
             );
 
@@ -49,7 +48,7 @@ class TimerIntervalController extends ApiController
             }
 
             $intervals = array_map( function($item) {
-                $item["duration"] = CarbonInterval::createFromFormat('i:s', $item["duration"])->totalSeconds;
+                $item["duration"] = getSeconds($item["duration"]);
 
                 return $item;
 
@@ -58,13 +57,15 @@ class TimerIntervalController extends ApiController
             $intervals = auth()->user()->timerIntervals()->createMany($intervals);
 
             $response = TimerIntervalResource::collection($intervals);
+
+            return $this->respondWithData($response, Response::HTTP_CREATED);
         }
 
         $intervalValidator = Validator::make($request->all(), [
-                'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}$/'],
+                'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/'],
             ],[
                 'duration.required' => 'Interval need to have a duration',
-                'duration.regex' => 'Interval durations needs to be in the format mm:ss'
+                'duration.regex' => 'Interval durations needs to be in the format HH:mm:ss'
             ]
         );
 
@@ -75,7 +76,7 @@ class TimerIntervalController extends ApiController
         $interval = auth()->user()->timerIntervals()->create([
             'timer_id' => $request->timer_id,
             'title' => $request->title,
-            'duration' => CarbonInterval::createFromFormat('i:s', $request->duration)->totalSeconds
+            'duration' => getSeconds($request->duration)
         ]);
 
         $response = new TimerIntervalResource($interval);
@@ -108,16 +109,16 @@ class TimerIntervalController extends ApiController
         $this->authorize('access', $timerInterval);
 
         $this->validate($request, [
-            'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}$/'],
+            'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/'],
             ],[
                 'duration.required' => 'Interval need to have a duration',
-                'duration.regex' => 'Interval durations needs to be in the format mm:ss'
+                'duration.regex' => 'Interval durations needs to be in the format HH:mm:ss'
         ]);
 
         $timerInterval->update([
             'timer_id' => $request->timer_id,
             'title' => $request->title,
-            'duration' => CarbonInterval::createFromFormat('i:s', $request->duration)->totalSeconds
+            'duration' => getSeconds($request->duration)
         ]);
 
         return $this->respondWithData(new TimerIntervalResource($timerInterval));

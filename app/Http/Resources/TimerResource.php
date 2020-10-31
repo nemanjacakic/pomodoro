@@ -19,7 +19,7 @@ class TimerResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'duration' => gmdate("i:s", $this->duration),
+            'duration' => gmdate("H:i:s", $this->duration),
             'order' => $this->order,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

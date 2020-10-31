@@ -37,13 +37,13 @@ class SettingsModalController extends ApiController
         if ($request->has('timers')) {
             $timerValidator = Validator::make($request->all(), [
                     'timers.*.name' => ['required','max:255'],
-                    'timers.*.duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}$/'],
+                    'timers.*.duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/'],
                 ],[
                     'timers.*.name.required' => 'All timers need to have a name',
                     'timers.*.name.max' => 'All timers names need to be 255 characters maximum',
 
                     'timers.*.duration.required' => 'All timers need to have a duration',
-                    'timers.*.duration.regex' => 'All timers durations need to be in the format mm:ss'
+                    'timers.*.duration.regex' => 'All timers durations need to be in the format HH:mm:ss'
                 ]
             );
         }
@@ -73,7 +73,7 @@ class SettingsModalController extends ApiController
                 auth()->user()->timers()->where('id', $timer["id"])->update(
                     [
                         'name' => $timer["name"],
-                        'duration' => CarbonInterval::createFromFormat('i:s', $timer["duration"])->totalSeconds
+                        'duration' => getSeconds($timer["duration"])
                     ]
                 );
             }

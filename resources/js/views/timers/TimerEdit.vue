@@ -21,7 +21,7 @@
         <div class="form-group">
           <label>Duration:</label>
 
-          <div><VueTimepicker format="mm:ss" input-class="form-control--timepicker" v-model="timer.duration"></VueTimepicker></div>
+          <div><VueTimepicker format="HH:mm:ss" input-class="form-control--timepicker" v-model="timer.duration"></VueTimepicker></div>
         </div>
 
         <div class="form-group">
@@ -80,11 +80,12 @@ import Loader from "~/components/Loader";
     this.loading = true;
     this.get(this.id)
       .then((timer) => {
-        console.log(timer);
         this.timer.id = timer.id;
         this.timer.name = timer.name;
         this.timer.duration = timer.duration;
         this.timer.order = timer.order;
+
+        //console.log();
 
         this.loading = false;
       })

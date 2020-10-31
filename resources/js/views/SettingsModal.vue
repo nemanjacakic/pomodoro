@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-6">
               <!-- <input class="form-control" type="text" v-model="timer.duration"> -->
-              <VueTimepicker format="mm:ss" v-model="timer.duration"></VueTimepicker>
+              <VueTimepicker format="HH:mm:ss" v-model="timer.duration"></VueTimepicker>
             </div>
           </div>
         </div>

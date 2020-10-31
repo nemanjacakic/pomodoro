@@ -33,7 +33,7 @@ class TimerController extends ApiController
     {
         $request->validate([
             'name' => ['required','max:255'],
-            'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}$/']
+            'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/']
         ]);
 
         $timer = auth()->user()->timers()->create([
@@ -71,7 +71,7 @@ class TimerController extends ApiController
     {
         $request->validate([
             'name' => ['required','max:255'],
-            'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}$/']
+            'duration' => ['required', 'regex:/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/']
         ]);
 
         $timer->update(
