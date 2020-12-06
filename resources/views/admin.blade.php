@@ -7,6 +7,7 @@
         <title>Laravel</title>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/png" />
 
     </head>
     <body class="hold-transition sidebar-mini">
