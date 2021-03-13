@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       $user = User::factory()->create([
-            'first_name' => 'Nemanja',
-            'last_name' => 'Cakic',
-            'email' => 'nemanja.c@live.com'
+       User::factory()->create([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@example.com'
         ]);
 
         $this->call(TimerSoundSeeder::class);
