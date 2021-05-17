@@ -78,13 +78,16 @@ export default {
       unwatchTimerSoundChange: null,
       notification: {
         title: 'Timer finished!',
-      }
+      },
+      oldPageTitle: ''
     }
   },
   mixins: [
       time
   ],
   mounted() {
+    this.oldPageTitle = document.title;
+
     this.unwatchTimerSoundChange = this.$store.watch((state, getters) => state.settings.settings.timerSound, (newValue, oldValue) => {
         this.timerSound = new Audio(this.settings['timerSound']);
       },
@@ -143,9 +146,13 @@ export default {
       this.activeTimer.timeLeft = timer.duration;
     },
     startTimer() {
+      document.title = this.activeTimer.timeLeft;
+
       if ( this.countdownNotFinished() ) {
         this.timer = setInterval(() => {
           this.countDown();
+
+          document.title = this.activeTimer.timeLeft;
 
           if (this.countdownFinished()) {
             this.saveTimerIntervalsLocaly();
@@ -175,6 +182,8 @@ export default {
       this.timer = null;
     },
     resetTimer() {
+      document.title = this.oldPageTitle;
+
       if (this.timerIsOn) {
         this.stopTimer();
       }
